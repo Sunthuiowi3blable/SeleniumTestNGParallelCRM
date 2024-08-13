@@ -1,9 +1,6 @@
-package com.anhtester.PageObjectModel.testcases;
+package com.anhtester.Bai29_DataProvider.testcases;
 
-import com.anhtester.PageObjectModel.pages.DashboardPage;
-import com.anhtester.PageObjectModel.pages.LoginPage;
 import com.anhtester.common.BaseTestE2E;
-import com.anhtester.constants.ConfigData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

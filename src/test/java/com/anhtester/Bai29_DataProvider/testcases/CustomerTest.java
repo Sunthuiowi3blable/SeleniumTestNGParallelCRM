@@ -1,11 +1,10 @@
-package com.anhtester.PageObjectModel.testcases;
+package com.anhtester.Bai29_DataProvider.testcases;
 
-import com.anhtester.PageObjectModel.pages.*;
+import com.anhtester.Bai29_DataProvider.pages.*;
 import com.anhtester.common.BaseTest;
 import com.anhtester.constants.ConfigData;
 import com.anhtester.helpers.ExcelHelper;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class CustomerTest extends BaseTest {

@@ -1,8 +1,7 @@
-package com.anhtester.PageObjectModel.pages;
+package com.anhtester.Bai29_DataProvider.pages;
 
 import com.anhtester.keywords.WebUI;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class CommonPage {
 

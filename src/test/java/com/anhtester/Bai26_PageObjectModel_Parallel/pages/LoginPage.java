@@ -1,10 +1,9 @@
-package com.anhtester.PageObjectModel.pages;
+package com.anhtester.Bai26_PageObjectModel_Parallel.pages;
 
 import com.anhtester.constants.ConfigData;
 import com.anhtester.drivers.DriverManager;
 import com.anhtester.keywords.WebUI;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class LoginPage extends CommonPage {

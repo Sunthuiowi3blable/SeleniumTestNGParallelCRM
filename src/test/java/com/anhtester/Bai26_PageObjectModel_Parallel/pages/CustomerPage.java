@@ -1,11 +1,10 @@
-package com.anhtester.PageObjectModel.pages;
+package com.anhtester.Bai26_PageObjectModel_Parallel.pages;
 
 import com.anhtester.drivers.DriverManager;
 import com.anhtester.helpers.ExcelHelper;
 import com.anhtester.keywords.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import static com.anhtester.keywords.WebUI.*;
