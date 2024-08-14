@@ -1,11 +1,15 @@
 package com.anhtester.Bai29_DataProvider.pages;
 
+import com.anhtester.Bai29_DataProvider.pages.CommonPage;
 import com.anhtester.drivers.DriverManager;
 import com.anhtester.helpers.ExcelHelper;
 import com.anhtester.keywords.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+
+import java.util.Hashtable;
 
 import static com.anhtester.keywords.WebUI.*;
 
@@ -56,37 +60,34 @@ public class CustomerPage extends CommonPage {
     }
 
     //Hàm nhập thông tin trong trang sau khi ấn vào nút Add New Customer
-    public void enterDataAddNewCustomer(String customerName, int row){
-        ExcelHelper excelHelper = new ExcelHelper();
-        excelHelper.setExcelFile("src/test/resources/testdata/Login.xlsx", "Customer");
-
-        setText(inputCompany, excelHelper.getCellData("CUSTOMER_NAME", row));
-        setText(inputVat, excelHelper.getCellData("VAT", row));
-        setText(inputPhone, excelHelper.getCellData("PHONE", row));
-        setText(inputWebsite, excelHelper.getCellData("WEBSITE", row));
+    public void enterDataAddNewCustomer(Hashtable<String, String> data){
+        setText(inputCompany, data.get("CUSTOMER_NAME"));
+        setText(inputVat, data.get("VAT"));
+        setText(inputPhone, data.get("PHONE"));
+        setText(inputWebsite, data.get("WEBSITE"));
         clickElement(selectGroup);
         sleep(1);
-        setText(inputGroup, "VIP");
+        setText(inputGroup, data.get("GROUP"));
         sleep(1);
         setKey(inputGroup, Keys.ENTER);
         sleep(1);
         clickElement(selectGroup);
-        selectlanguage("Vietnamese");
+        selectlanguage(data.get("LANGUAGE"));
         sleep(2);
 
-        setText(inputAddress, "Ha Noi");
-        setText(inputCity, "Ha Noi");
-        setText(inputState, "Ha Noi");
-        setText(inputZip, "12345");
+        setText(inputAddress, data.get("ADDRESS"));
+        setText(inputCity, data.get("CITY"));
+        setText(inputState, data.get("STATE"));
+        setText(inputZip, data.get("ZIP"));
 
         clickElement(selectCountry);
         sleep(1);
-        setText(inputCountry, "VietNam");
+        setText(inputCountry, data.get("COUNTRY"));
         sleep(1);
         setKey(selectCountry, Keys.ENTER);
         sleep(1);
         clickElement(buttonSave);
-        WebUI.waitForPageLoaded();
+        sleep(2);
 
         Assert.assertTrue(checkElementExist(alertMessage), "\uD83D\uDC1E FAIL!! The alert message success not display.");
         //.trim() là bỏ qua khoảng trắng lấy mỗi text
@@ -94,11 +95,11 @@ public class CustomerPage extends CommonPage {
     }
 
     //Kiểm tra bằng việc tìm kiếm phần tử vừa Add và gettext giá trị vừa thêm ra
-    public void checkCustomerInTableList(String customerName){
+    public void checkCustomerInTableList(Hashtable<String, String> data){
         waitForPageLoaded();
         clickElement(menuCustomers);
         waitForPageLoaded();
-        setText(inputSearchCustomer, customerName);
+        setText(inputSearchCustomer, data.get("CUSTOMER_NAME"));
         waitForPageLoaded();
         sleep(2);
 
@@ -106,23 +107,23 @@ public class CustomerPage extends CommonPage {
         Assert.assertTrue(checkElementExist(firstItemCustomerName), "\uD83D\uDC1E FAIL!! The customer name not display in table.");
         //Assert.assertEquals(driver.findElement(firstItemCustomerName).getText(), customerName, "\uD83D\uDC1E FAIL!! The customer name not match.");
 
-        assertEquals(getElementText(firstItemCustomerName), customerName, "\uD83D\uDC1E FAIL!! The customer name not match.");
+        assertEquals(getElementText(firstItemCustomerName), data.get("CUSTOMER_NAME"), "\uD83D\uDC1E FAIL!! The customer name not match.");
 
     }
 
     //Kiểm tra laại giá trị các thông tin được add vào
-    public void checkCustomerDetail(String customerName){
+    public void checkCustomerDetail(Hashtable<String, String> data){
         waitForPageLoaded();
         clickElement(firstItemCustomerName);
         waitForPageLoaded();
 
         //Check customer detail in Customer Detail page
-        assertEquals(getElementAttribute(inputCompany, "value"), customerName, "FAIL!! The Company name not match.");
-        assertEquals(getElementAttribute(inputVat,"value"), "20", "FAIL!! The VAT value not match.");
-        assertEquals(getElementAttribute(inputPhone,"value"), "56789", "FAIL!! The Phone value not match.");
-        assertEquals(getElementAttribute(inputWebsite, "value"), "https://anhtester.com", "FAIL!! The Website value not match.");
-        assertEquals(getElementAttribute(selectGroup,"title"), "VIP", "FAIL!! The Group of customer not match.");
-        assertEquals(getElementAttribute(selectLanguage,"title"), "Vietnamese", "FAIL!! The Language value not match.");
-        assertEquals(getElementAttribute(inputAddress,"value"), "Can Tho", "FAIL!! The Address value not match.");
+        assertEquals(getElementAttribute(inputCompany, "value"), data.get("CUSTOMER_NAME"), "FAIL!! The Company name not match.");
+        assertEquals(getElementAttribute(inputVat,"value"), data.get("VAT"), "FAIL!! The VAT value not match.");
+        assertEquals(getElementAttribute(inputPhone,"value"), data.get("PHONE"), "FAIL!! The Phone value not match.");
+        assertEquals(getElementAttribute(inputWebsite, "value"), data.get("WEBSITE"), "FAIL!! The Website value not match.");
+        assertEquals(getElementAttribute(selectGroup,"title"), data.get("GROUP"), "FAIL!! The Group of customer not match.");
+        assertEquals(getElementAttribute(selectLanguage,"title"), data.get("LANGUAGE"), "FAIL!! The Language value not match.");
+        assertEquals(getElementAttribute(inputAddress,"value"), data.get("ADDRESS"), "FAIL!! The Address value not match.");
     }
 }

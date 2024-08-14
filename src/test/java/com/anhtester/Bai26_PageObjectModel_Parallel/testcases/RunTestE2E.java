@@ -37,7 +37,7 @@ public class RunTestE2E extends BaseTestE2E {
         System.out.println("▫\uFE0FTotal Customer Before: " + totalCustomersBefore);
 
         getCustomerPage().clickAddNewButton();
-        getCustomerPage().enterDataAddNewCustomer(CUSTOMER_NAME, 1);
+        getCustomerPage().enterDataAddNewCustomer(CUSTOMER_NAME);
         getCustomerPage().checkCustomerInTableList(CUSTOMER_NAME);
 
         //In dữ liệu của Total Customers sau khi thêm mới
