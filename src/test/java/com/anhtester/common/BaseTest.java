@@ -3,6 +3,7 @@ package com.anhtester.common;
 import com.anhtester.drivers.DriverManager;
 import com.anhtester.helpers.CaptureHelper;
 import com.anhtester.helpers.PropertiesHelper;
+import com.anhtester.listeners.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -10,12 +11,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+@Listeners(TestListener.class)
 public class BaseTest {
-
-    @BeforeSuite
-    public void setupEnviroment(){
-        PropertiesHelper.loadAllFiles();
-    }
 
     @BeforeMethod
     @Parameters({"zzbrowser"})
@@ -76,11 +73,6 @@ public class BaseTest {
 
     @AfterMethod
     public void closeDriver(ITestResult iTestResult){
-
-        //Lấy ra trạng thái của testcase sau khi chạy test (ở đây là trạng thái fail) sau đó chụp lại. Chỉ chụp trong trường hợp testcase bị Fail. Pass thì không chụp.
-        if (iTestResult.getStatus() == ITestResult.FAILURE){
-            CaptureHelper.screenshot(iTestResult.getName());
-        }
 
         //Trước khi tắt driver trong trường hợp testcase bị fail thì sẽ chụp màn hình cái đoạn dừng bị fail đó rồi mới tắt
         DriverManager.quit();
