@@ -4,6 +4,7 @@ import com.anhtester.Bai31_TestListener.pages.*;
 import com.anhtester.common.BaseTest;
 import com.anhtester.dataproviders.DataProviderFactory;
 import com.anhtester.helpers.ExcelHelper;
+import com.anhtester.utils.LogUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -40,14 +41,14 @@ public class CustomerTest extends BaseTest {
         int totalCustomersBefore = Integer.parseInt(customerPage.getTotalCustomers());
 
         //In dữ diệu của Total Customers ban đầu
-        System.out.println("▫\uFE0FTotal Customer Before: " + totalCustomersBefore);
+        LogUtils.info("▫\uFE0FTotal Customer Before: " + totalCustomersBefore);
 
         customerPage.clickAddNewButton();
         customerPage.enterDataAddNewCustomer(data);
         customerPage.checkCustomerInTableList(data);
 
         //In dữ liệu của Total Customers sau khi thêm mới
-        System.out.println("▫\uFE0FTotal Customer After: " + customerPage.getTotalCustomers());
+        LogUtils.info("▫\uFE0FTotal Customer After: " + customerPage.getTotalCustomers());
 
         //String.valueOf là một phương thức tĩnh trong lớp String của Java, được sử dụng để chuyển đổi các loại dữ liệu khác thành một chuỗi (String).
         Assert.assertEquals(customerPage.getTotalCustomers(), String.valueOf(totalCustomersBefore + 1), "FAIL!! The Total Customers in Customer Page not match.");

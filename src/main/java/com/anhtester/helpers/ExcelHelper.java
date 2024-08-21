@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+
+import com.anhtester.utils.LogUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -51,7 +53,7 @@ public class ExcelHelper {
             });
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LogUtils.error(e.getMessage());
         }
     }
 
@@ -115,10 +117,10 @@ public class ExcelHelper {
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
-            System.out.println("Set data completed.");
+            LogUtils.info("Set data completed.");
 
         } catch (Exception e) {
-            e.getMessage();
+            LogUtils.error(e.getMessage());
         }
     }
 
@@ -148,10 +150,10 @@ public class ExcelHelper {
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
-            System.out.println("Set data completed.");
+            LogUtils.info("Set data completed.");
 
         } catch (Exception e) {
-            e.getMessage();
+            LogUtils.error(e.getMessage());
         }
     }
 
@@ -205,7 +207,7 @@ public class ExcelHelper {
                 }
             }
         } catch (Exception e) {
-            System.out.println("The exception is:" + e.getMessage());
+            LogUtils.info(e.getMessage());
             throw new RuntimeException(e);
         }
         return data; //data là 1 object 2 chiều đã khởi tạo đối tượng bên trên
@@ -217,7 +219,7 @@ public class ExcelHelper {
             row = sh.getRow(0);
             return row.getLastCellNum();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LogUtils.error(e.getMessage());
             throw (e);
         }
     }
@@ -243,7 +245,7 @@ public class ExcelHelper {
                     System.out.println("File Excel path not found.");
                     throw new IOException("File Excel path not found.");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LogUtils.error(e.getMessage());
                 }
             }
 
@@ -256,8 +258,8 @@ public class ExcelHelper {
             int rows = getLastRowNum();
             int columns = getColumns();
 
-            System.out.println("Row: " + rows + " - Column: " + columns);
-            System.out.println("StartRow: " + startRow + " - EndRow: " + endRow);
+            LogUtils.info("Row: " + rows + " - Column: " + columns);
+            LogUtils.info("StartRow: " + startRow + " - EndRow: " + endRow);
 
             data = new Object[(endRow - startRow) + 1][1];
             Hashtable<String, String> table = null;
@@ -270,7 +272,7 @@ public class ExcelHelper {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e.getMessage());
         }
 
         return data;

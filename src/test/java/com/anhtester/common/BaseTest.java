@@ -29,7 +29,7 @@ public class BaseTest {
         DriverManager.setDriver(driver); //Gán giá trị driver vào trong ThreadLocal
     }
 
-    //Khi đã truyền tham số (tham số được truyêền trong file xml) vào sẽ chạy hàm này
+    //Khi đã truyền tham số (tham số được truyền trong file xml) vào sẽ chạy hàm này
     public WebDriver setupDriver(String browserName) {
         WebDriver driver; //driver là để mang giá trị tạm thời
 
