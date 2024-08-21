@@ -112,8 +112,12 @@ public class WebUI {
 
         //Nếu giá trị "SCREENSHOT_STEP_ALL" = true thì nó sẽ screenshot, bằng false thì không screenshot
         if (PropertiesHelper.getValue("SCREENSHOT_STEP_ALL").equals("true")){
-            CaptureHelper.screenshot(SystemHelper.makeSlug("setText_" + by.toString()));
+            CaptureHelper.screenshot(SystemHelper.makeSlug("setKey_" + by.toString()));
         }
+    }
+
+    public static void clearText (By by){
+        getWebElement(by).clear();
     }
 
     public static String getElementText(By by) {

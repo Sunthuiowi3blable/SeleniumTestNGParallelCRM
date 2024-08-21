@@ -48,6 +48,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         LogUtils.error("❌ Test case " + iTestResult.getName() + " failed.");
+
         //Lấy ra lý do lỗi
         LogUtils.error(iTestResult.getThrowable());
 

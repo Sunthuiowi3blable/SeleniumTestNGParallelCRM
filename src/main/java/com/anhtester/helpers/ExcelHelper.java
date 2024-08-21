@@ -157,7 +157,7 @@ public class ExcelHelper {
         }
     }
 
-    //Get all data from a sheet
+    //Get all data from a sheet, Hàm lấy tất cả dữ liệu trong file excel (cùng kiểu dữ liệu với DataProvider laf Object 2 chiều)
     public Object[][] getExcelData(String filePath, String sheetName) {
         Object[][] data = null;
         Workbook workbook = null;

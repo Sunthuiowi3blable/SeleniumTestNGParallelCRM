@@ -65,6 +65,7 @@ public class PropertiesHelper {
         }
     }
 
+    //Hàm đọc giá trị từ file .properties (vd: config.properties)
     public static String getValue(String key) {
         String value = null;
         try {
@@ -83,6 +84,7 @@ public class PropertiesHelper {
         return value;
     }
 
+    //Hàm ghi giá trị vào file .properties (vd: config.properties)
     public static void setValue(String key, String keyValue) {
         try {
             if (file == null) {
