@@ -23,13 +23,26 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
         LogUtils.info("⭐ Starting test case " + iTestResult.getName());
-//        CaptureHelper.startRecord(arg0.getName());
+
+        //Nếu giá trị "RECORD_VIDEO" = true thì nó sẽ record video, bằng false thì không record video
+        if (PropertiesHelper.getValue("RECORD_VIDEO").equals("true")){
+                    CaptureHelper.startRecord(iTestResult.getName());
+        }
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         LogUtils.info("✅ Test case " + iTestResult.getName() + " passedd.");
-//        CaptureHelper.stopRecord();
+
+        //Nếu giá trị "SCREENSHOT_STEP_PASS" = true thì nó sẽ screenshot, bằng false thì không screenshot
+        if (PropertiesHelper.getValue("SCREENSHOT_STEP_PASS").equals("true")){
+            CaptureHelper.screenshot(iTestResult.getName());
+        }
+
+        //Nếu giá trị "RECORD_VIDEO" = true thì nó sẽ record video, bằng false thì không record video
+        if (PropertiesHelper.getValue("RECORD_VIDEO").equals("true")) {
+            CaptureHelper.stopRecord();
+        }
     }
 
     @Override
@@ -37,14 +50,25 @@ public class TestListener implements ITestListener {
         LogUtils.error("❌ Test case " + iTestResult.getName() + " failed.");
         //Lấy ra lý do lỗi
         LogUtils.error(iTestResult.getThrowable());
-        CaptureHelper.screenshot(iTestResult.getName());
-//        CaptureHelper.stopRecord();
+
+        //Nếu giá trị "SCREENSHOT_STEP_FAIL" = true thì nó sẽ screenshot, bằng false thì không screenshot
+        if (PropertiesHelper.getValue("SCREENSHOT_STEP_FAIL").equals("true")){
+            CaptureHelper.screenshot(iTestResult.getName());
+        }
+
+        //Nếu giá trị "RECORD_VIDEO" = true thì nó sẽ record video, bằng false thì không record video
+        if (PropertiesHelper.getValue("RECORD_VIDEO").equals("true")) {
+            CaptureHelper.stopRecord();
+        }
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         LogUtils.warn("\uD83D\uDD1C Test case " + iTestResult.getName() + " skipped.");
-//        CaptureHelper.stopRecord();
-    }
 
+        //Nếu giá trị "RECORD_VIDEO" = true thì nó sẽ record video, bằng false thì không record video
+        if (PropertiesHelper.getValue("RECORD_VIDEO").equals("true")) {
+            CaptureHelper.stopRecord();
+        }
+    }
 }

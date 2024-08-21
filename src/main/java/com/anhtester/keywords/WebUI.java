@@ -2,7 +2,9 @@ package com.anhtester.keywords;
 
 import com.anhtester.constants.ConfigData;
 import com.anhtester.drivers.DriverManager;
+import com.anhtester.helpers.CaptureHelper;
 import com.anhtester.helpers.PropertiesHelper;
+import com.anhtester.helpers.SystemHelper;
 import com.anhtester.utils.LogUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -60,6 +62,11 @@ public class WebUI {
         DriverManager.getDriver().get(url);
         sleep(STEP_TIME);
         LogUtils.info("♻\uFE0F Open URL: " + url);
+
+        //Nếu giá trị "SCREENSHOT_STEP_ALL" = true thì nó sẽ screenshot, bằng false thì không screenshot
+        if (PropertiesHelper.getValue("SCREENSHOT_STEP_ALL").equals("true")){
+            CaptureHelper.screenshot(SystemHelper.makeSlug("openURL_" + url));
+        }
     }
 
     public static void clickElement(By by) {
@@ -67,6 +74,11 @@ public class WebUI {
         sleep(STEP_TIME);
         getWebElement(by).click();
         LogUtils.info("✅ Click element: " + by);
+
+        //Nếu giá trị "SCREENSHOT_STEP_ALL" = true thì nó sẽ screenshot, bằng false thì không screenshot
+        if (PropertiesHelper.getValue("SCREENSHOT_STEP_ALL").equals("true")){
+            CaptureHelper.screenshot(SystemHelper.makeSlug("clickElement_" + by.toString()));
+        }
     }
 
     public static void clickElement(By by, long timeout) {
@@ -74,6 +86,11 @@ public class WebUI {
         sleep(STEP_TIME);
         getWebElement(by).click();
         LogUtils.info("\uD83D\uDC49 Click element: " + by);
+
+        //Nếu giá trị "SCREENSHOT_STEP_ALL" = true thì nó sẽ screenshot, bằng false thì không screenshot
+        if (PropertiesHelper.getValue("SCREENSHOT_STEP_ALL").equals("true")){
+            CaptureHelper.screenshot(SystemHelper.makeSlug("clickElement_" + by.toString()));
+        }
     }
 
     //Sendkeys
@@ -82,11 +99,21 @@ public class WebUI {
         sleep(STEP_TIME);
         getWebElement(by).sendKeys(value);
         LogUtils.info("✅ Set text: " + value + " on element " + by);
+
+        //Nếu giá trị "SCREENSHOT_STEP_ALL" = true thì nó sẽ screenshot, bằng false thì không screenshot
+        if (PropertiesHelper.getValue("SCREENSHOT_STEP_ALL").equals("true")){
+            CaptureHelper.screenshot(SystemHelper.makeSlug("setText_" + by.toString()));
+        }
     }
 
 
     public static void setKey(By by, Keys keys){
         getWebElement(by).sendKeys(keys);
+
+        //Nếu giá trị "SCREENSHOT_STEP_ALL" = true thì nó sẽ screenshot, bằng false thì không screenshot
+        if (PropertiesHelper.getValue("SCREENSHOT_STEP_ALL").equals("true")){
+            CaptureHelper.screenshot(SystemHelper.makeSlug("setText_" + by.toString()));
+        }
     }
 
     public static String getElementText(By by) {
